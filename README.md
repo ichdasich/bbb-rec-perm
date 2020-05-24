@@ -37,3 +37,22 @@ In addition, you can also use the error page (with far too much css overhead)
 supplied in error-page/ (placed into the directory /bbb relative to your
 webroot in the supplied nginx conf) to display an error page that explains
 these settings to your users, in case you also use the greenlight integration.
+
+### Password authentication for recordings
+
+The password authentication auth-hooks add the ability to use `HTTP_AUTH`
+against the greenlight user database. For this to work, python3-bcrypt must be
+installed as well.  The scripts allow you to configure the gllisted values that
+trigger the following auth cases:
+
+#### `PUBLIC`
+The meeting is publicly available, i.e., accessible without authentication.
+
+#### `GL_AUTH`
+Any credentials of any GL user work.
+
+#### `GL_USER_PRIV`
+Only the credentials of the room owner work.
+
+#### `GL_USER_SHARE`
+Credentials of the room owner and anyone they shared the room with work.
