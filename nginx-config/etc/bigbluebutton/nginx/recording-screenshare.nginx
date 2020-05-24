@@ -19,6 +19,12 @@
         location /recording/screenshare {
                 alias    /var/bigbluebutton/published/screenshare;
                 index  index.html index.htm;
+                ### Uncomment the next three lines if you want to use password
+                ### authentication (see dedicated files. Create /var/www/htpasswd
+                ### as an empty file with 'touch /var/www/htpasswd'.
+                # satisfy any;
+                # auth_basic "Restricted";
+                # auth_basic_user_file "/var/www/htpasswd";
                 auth_request /auth;
                 error_page 403 /bbb/index.html;
         }
