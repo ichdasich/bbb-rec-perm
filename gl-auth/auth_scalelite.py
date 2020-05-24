@@ -21,12 +21,10 @@ def parse_url(url=''):
 		return False	
 
 def get_meeting_gl_publish(meetingid):
-	print("Getting "+meetingid)
 	cur = conn.cursor()
 	cur.execute("SELECT id FROM recordings WHERE record_id = %s;", (meetingid,))
 	recordingid = cur.fetchall()
 	if not recordingid:
-		print('No record found')
 		return 403
 	else:
 		cur.execute("SELECT value FROM metadata WHERE key = 'gl-listed' AND recording_id = %s;", (recordingid[0][0],))
