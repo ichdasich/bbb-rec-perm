@@ -19,7 +19,7 @@
         location /notes {
                 root    /var/bigbluebutton/published;
                 index  index.html index.htm;
-		auth_request /auth;
-		error_page 403 /bbb/index.html;
+                auth_request /auth;
+                error_page 403 /bbb/index.html;
         }
 
