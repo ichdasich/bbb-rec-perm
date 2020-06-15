@@ -164,6 +164,8 @@ def ret_auth(authcode=403):
 	if authcode == 200:
 		print("Content-Type: text/html")
 		print("")
+		elif authcode == 401:
+			print('Status: 401 Unauthorized\r\nWWW-Authenticate: Basic realm="Log in to view private recording"\r\n\r\n')
 	else:
 		print('Status: 403 Forbidden\r\n\r\n')
 
@@ -172,13 +174,13 @@ meetingid = parse_url(os.environ['HTTP_X_ORIGINAL_URI'])
 if meetingid:
 	retcode = get_meeting_gl_publish(meetingid, RECORDING_PATH)
 	# If not failure/public
-	if not retcode == 403 or retcode == 200:
+	if not retcode == 403 and not retcode == 200:
 		authenticated = False
-		# Try to get credentials from basic auth
+		# Try to get credentials from basic auth or challenge if no credentials
 		try:
 			user, pswd = get_credentials(os.environ)
 		except:
-			retcode = 403
+			retcode = 401
 		if retcode == "MATCH_ALL":
 			authenticated = authenticate_gl_db(user, pswd)
 		if retcode == "MATCH_USER":
