@@ -162,13 +162,15 @@ def get_meeting_gl_publish(meetingid):
 			if GL_USER_SHARE_VALUE == gllisted[0][0]:
 				return "MATCH_SHARED"
 			return 403
-	except:
-		return 403
+	#except:
+		#return 403
 
 def ret_auth(authcode=403):
 	if authcode == 200:
 		print("Content-Type: text/html")
 		print("")
+	elif authcode == 401:
+		print('Status: 401 Unauthorized\r\nWWW-Authenticate: Basic realm="Log in to view private recording"\r\n\r\n')
 	else:
 		print('Status: 403 Forbidden\r\n\r\n')
 
@@ -177,13 +179,13 @@ meetingid = parse_url(os.environ['HTTP_X_ORIGINAL_URI'])
 if meetingid:
 	retcode = get_meeting_gl_publish(meetingid)
 	# If not failure/public
-	if not retcode == 403 or retcode == 200:
+	if not retcode == 403 and not retcode == 200:
 		authenticated = False
-		# Try to get credentials from basic auth
+		# Try to get credentials from basic auth or challenge if no credentials
 		try:
 			user, pswd = get_credentials(os.environ)
 		except:
-			retcode = 403
+			retcode = 401
 		if retcode == "MATCH_ALL":
 			authenticated = authenticate_gl_db(user, pswd)
 		if retcode == "MATCH_USER":
@@ -191,7 +193,7 @@ if meetingid:
 			if check_owner(meetingid, user):
 				authenticated = authenticate_gl_db(user, pswd)
 		if retcode == "MATCH_SHARED":
-			if check_shared(meetingid, user) or check_owner(meetingid, user, RECORDING_PATH):
+			if check_shared(meetingid, user) or check_owner(meetingid, user):
 				authenticated = authenticate_gl_db(user, pswd)
 		if authenticated:
 			retcode = 200
