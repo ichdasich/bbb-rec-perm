@@ -164,8 +164,8 @@ def ret_auth(authcode=403):
 	if authcode == 200:
 		print("Content-Type: text/html")
 		print("")
-		elif authcode == 401:
-			print('Status: 401 Unauthorized\r\nWWW-Authenticate: Basic realm="Log in to view private recording"\r\n\r\n')
+	elif authcode == 401:
+		print('Status: 401 Unauthorized\r\nWWW-Authenticate: Basic realm="Log in to view private recording"\r\n\r\n')
 	else:
 		print('Status: 403 Forbidden\r\n\r\n')
 
