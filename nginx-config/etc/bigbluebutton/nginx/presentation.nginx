@@ -31,6 +31,7 @@
                 # auth_basic_user_file "/var/www/htpasswd";
                 auth_request /auth;
                 error_page 403 /bbb/index.html;
+                error_page 401 /bbb/index.html;
         }
 
         location /playback/presentation {
@@ -44,6 +45,7 @@
                 # auth_basic_user_file "/var/www/htpasswd";
                 auth_request /auth;
                 error_page 403 /bbb/index.html;
+                error_page 401 /bbb/index.html;
         }
 
         location /presentation {
@@ -57,5 +59,6 @@
                 # auth_basic_user_file "/var/www/htpasswd";
                 auth_request /auth;
                 error_page 403 /bbb/index.html;
+                error_page 401 /bbb/index.html;
         }
 
