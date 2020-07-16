@@ -27,8 +27,8 @@ GL_USER_SHARE_VALUE = 'false'
 
 
 def parse_url(url=''):
-	r = re.compile(r'[0-9a-f]{40}-[0-9]{13}')
-	t = re.compile(r'^/presentation/[0-9a-f]{40}-[0-9]{13}/presentation/[0-9a-f]{40}-[0-9]{13}/thumbnails/(thumb-[1-3].png|images/favicon.png)$')
+	r = re.compile(r'[0-9a-z]{40}-[0-9]{13}')
+	t = re.compile(r'^/presentation/[0-9a-z]{40}-[0-9]{13}/presentation/[0-9a-z]{40}-[0-9]{13}/thumbnails/(thumb-[1-3].png|images/favicon.png)$')
 	try:
 		thumb = t.findall(url)
 		if thumb:
