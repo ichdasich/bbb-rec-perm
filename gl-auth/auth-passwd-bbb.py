@@ -4,6 +4,7 @@ import os
 import re
 import base64
 import bcrypt
+from bs4 import BeautifulSoup
 
 import psycopg2
 conn_auth = psycopg2.connect("dbname=greenlight_production user=postgres password=PASSWORD host=localhost")
@@ -73,11 +74,11 @@ def authenticate_gl_db(user, pswd):
 
 def get_meeting_bbbid(meetingid, recording_path='/var/bigbluebutton/published/presentation/'):
 	try:
-		metadata = open(recording_path+'/'+meetingid+'/metadata.xml', 'r')
-		for line in metadata:
-			if '<meetingId>' in line:
-				re_bbbid = re.compile(r'[a-f0-9]{40}')
-				return re_bbbid.findall(line)[0]
+		metadata_file = open(recording_path+'/'+meetingid+'/metadata.xml', 'r')
+		metadata_xml = metadata_file.read()
+		metadata = BeautifulSoup(metadata_xml,'xml')
+		mids = metadata.find_all('meetingId')
+		return mids[0].get_text()
 	except:
 		return False
 	return False
