@@ -76,8 +76,8 @@ def get_meeting_bbbid(meetingid, recording_path='/var/bigbluebutton/published/pr
 		metadata = open(recording_path+'/'+meetingid+'/metadata.xml', 'r')
 		for line in metadata:
 			if '<meetingId>' in line:
-				re_bbbid = re.compile(r'[a-f0-9]{40}')
-				return re_bbbid.findall(line)[0]
+				re_internalid = re.compile(r'[a-z0-9]{40}')
+				return re_internalid.findall(line)[0]
 	except:
 		return False
 	return False
