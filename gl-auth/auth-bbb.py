@@ -17,7 +17,7 @@ def parse_url(url=''):
 	except:
 		return False	
 
-def get_meeting_gl_publish(meetingid, recording_path='/mnt/scalelite-recordings/var/bigbluebutton/published/presentation/'):
+def get_meeting_gl_publish(meetingid, recording_path='/var/bigbluebutton/published/presentation/'):
 	try:
 		metadata = open(recording_path+'/'+meetingid+'/metadata.xml', 'r')
 		for line in metadata:
