@@ -1,4 +1,4 @@
-# Finer access to BigBlueButton recordings with greenlight
+# Fine-grained access controll to BigBlueButton recordings with greenlight
 This toolchain allows restricting access to unlisted / not intended for
 publications on a BigBlueButton server with a greenlight frontend. (Related to
 https://github.com/bigbluebutton/bigbluebutton/issues/8505 and 
