@@ -77,7 +77,10 @@ Credentials of the room owner and anyone they shared the room with work.
 6. Install psycopg
 `apt-get install python3-psycopg2`
 
-7. Select the right rec-perm script for your usecase:
+7. Install BeautifulSoup
+`apt-get install python3-bs4`
+
+8. Select the right rec-perm script for your usecase:
 
 - auth-bbb.py - Only make presentations inaccessible when set to private with vanilla BBB
 - auth-passwd-bbb.py - Password authentication with vanilla BBB
@@ -86,9 +89,9 @@ Credentials of the room owner and anyone they shared the room with work.
 
 Copy the selected file to /var/www/html/gl-auth/auth.py (and create the directories on the path)
 
-8. Edit you postgresql password(s) to the correct ones for greenlight (in .env) and, if used, for scalelite
+9. Edit you postgresql password(s) to the correct ones for greenlight (in .env) and, if used, for scalelite
 
-9. Edit your nginx configuration as follows; Adjust hostnames where necessary
+10. Edit your nginx configuration as follows; Adjust hostnames where necessary
 
 ```
 server {  
@@ -205,8 +208,8 @@ server {
 }  
 ```
 
-10. Replace nginx configuration files in /etc/bigbluebutton/nginx 
+11. Replace nginx configuration files in /etc/bigbluebutton/nginx 
 
 `cp bbb-rec-perm/nginx-conf/etc/bigbluebutton/nginx/* /etc/bigbluebutton/nginx`
 
-11. In case you are using the passwordless rec-perm config, copy the custom error page to your webroot and adjust the configuration accordingly.
+12. In case you are using the passwordless rec-perm config, copy the custom error page to your webroot and adjust the configuration accordingly.
